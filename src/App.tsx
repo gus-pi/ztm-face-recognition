@@ -4,8 +4,19 @@ import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import Logo from './components/Logo';
 import Navigation from './components/Navigation';
 import Rank from './components/Rank';
+import { useState } from 'react';
 
 function App() {
+  const [query, setQuery] = useState('');
+
+  const onQueryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(event.target.value);
+  };
+
+  const onSubmit = () => {
+    console.log('click');
+  };
+
   return (
     <div>
       <div className="particles">
@@ -13,8 +24,8 @@ function App() {
       </div>
       <Navigation />
       <Logo />
-      <Rank />
-      <ImageLinkForm />
+      <Rank />s
+      <ImageLinkForm onQueryChange={onQueryChange} onSubmit={onSubmit} />
     </div>
   );
 }
