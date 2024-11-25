@@ -1,11 +1,11 @@
 import './ImageLinkForm.css';
 
 type FormProps = {
-  onQueryChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onSubmit: () => void;
 };
 
-const ImageLinkForm = ({ onQueryChange, onSubmit }: FormProps) => {
+const ImageLinkForm = ({ onInputChange, onSubmit }: FormProps) => {
   return (
     <div className="text-center py-4">
       <p className="text-xl">
@@ -15,8 +15,8 @@ const ImageLinkForm = ({ onQueryChange, onSubmit }: FormProps) => {
         <div className="form p-6 rounded-md">
           <input
             type="text"
-            className="text-xl w-[70%]"
-            onChange={onQueryChange}
+            className="text-xl w-[70%] px-2"
+            onChange={onInputChange}
           />
           <button
             type="submit"

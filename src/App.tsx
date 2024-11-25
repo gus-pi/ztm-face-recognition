@@ -4,30 +4,40 @@ import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import Logo from './components/Logo';
 import Navigation from './components/Navigation';
 import Rank from './components/Rank';
-import { useState } from 'react';
+import { Component } from 'react';
 
-function App() {
-  const [query, setQuery] = useState('');
+class App extends Component {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      input: '',
+    };
+  }
 
-  const onQueryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     console.log(event.target.value);
   };
 
-  const onSubmit = () => {
+  onSubmit = () => {
     console.log('click');
   };
 
-  return (
-    <div>
-      <div className="particles">
-        <ParticlesBg type="cobweb" color="#ADD8E6" bg={true} num={100} />
+  render() {
+    return (
+      <div>
+        <div className="particles">
+          <ParticlesBg type="cobweb" color="#ADD8E6" bg={true} num={100} />
+        </div>
+        <Navigation />
+        <Logo />
+        <Rank />s
+        <ImageLinkForm
+          onInputChange={this.onInputChange}
+          onSubmit={this.onSubmit}
+        />
       </div>
-      <Navigation />
-      <Logo />
-      <Rank />s
-      <ImageLinkForm onQueryChange={onQueryChange} onSubmit={onSubmit} />
-    </div>
-  );
+    );
+  }
 }
 
 export default App;
