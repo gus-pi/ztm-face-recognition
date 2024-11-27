@@ -51,7 +51,10 @@ const returnClarifaiRequestOptions = (imageUrl: string) => {
 
 interface User {
   id: string;
+  name: string;
+  email: string;
   entries: number;
+  joined: string;
 }
 
 // Define the shape of the component's state
@@ -71,14 +74,29 @@ class App extends Component<{}, AppState> {
       input: '',
       imageUrl: '',
       user: {
-        id: '', // Initialize with an empty string or actual ID if available
+        id: '',
+        name: '',
+        email: '',
         entries: 0,
+        joined: '',
       },
       box: {},
       route: 'signin',
       isSignIn: false,
     };
   }
+
+  loadUser = (data: User) => {
+    this.setState({
+      user: {
+        id: data.id,
+        name: data.name,
+        email: data.email,
+        entries: data.entries,
+        joined: data.joined,
+      },
+    });
+  };
 
   calculateFaceLocation = (data: any) => {
     const clarifaiFace =
@@ -152,7 +170,10 @@ class App extends Component<{}, AppState> {
         ) : this.state.route === 'signin' ? (
           <SignIn onRouteChange={this.onRouteChange} />
         ) : (
-          <Register onRouteChange={this.onRouteChange} />
+          <Register
+            onRouteChange={this.onRouteChange}
+            loadUser={this.loadUser}
+          />
         )}
       </div>
     );

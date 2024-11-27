@@ -1,5 +1,4 @@
 import { Component } from 'react';
-//({ onRouteChange }: { onRouteChange: (s: string) => void })
 
 interface SignInState {
   signInEmail: string;
