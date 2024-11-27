@@ -73,6 +73,9 @@ class App extends Component<{}, AppState> {
     this.state = {
       input: '',
       imageUrl: '',
+      box: {},
+      route: 'signin',
+      isSignIn: false,
       user: {
         id: '',
         name: '',
@@ -80,9 +83,6 @@ class App extends Component<{}, AppState> {
         entries: 0,
         joined: '',
       },
-      box: {},
-      route: 'signin',
-      isSignIn: false,
     };
   }
 
@@ -157,7 +157,10 @@ class App extends Component<{}, AppState> {
         {this.state.route === 'home' ? (
           <div>
             <Logo />
-            <Rank />
+            <Rank
+              name={this.state.user.name}
+              entries={this.state.user.entries}
+            />
             <ImageLinkForm
               onInputChange={this.onInputChange}
               onSubmit={this.onSubmit}
@@ -168,7 +171,7 @@ class App extends Component<{}, AppState> {
             />
           </div>
         ) : this.state.route === 'signin' ? (
-          <SignIn onRouteChange={this.onRouteChange} />
+          <SignIn onRouteChange={this.onRouteChange} loadUser={this.loadUser} />
         ) : (
           <Register
             onRouteChange={this.onRouteChange}
