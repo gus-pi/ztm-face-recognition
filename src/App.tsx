@@ -9,46 +9,6 @@ import FaceRecognition from './components/FaceRecognition/FaceRecognition';
 import SignIn from './components/SignIn';
 import Register from './components/Register';
 
-const returnClarifaiRequestOptions = (imageUrl: string) => {
-  const PAT = '5c99ecce9bc84da98b455273e6bf1358';
-  // Specify the correct user_id/app_id pairings
-  // Since you're making inferences outside your app's scope
-  const USER_ID = 'ci84gqtwtwmy';
-  const APP_ID = 'test';
-  // Change these to whatever model and image URL you want to use
-  const MODEL_ID = 'face-detection';
-  const IMAGE_URL = imageUrl;
-
-  const raw = JSON.stringify({
-    user_app_id: {
-      user_id: USER_ID,
-
-      app_id: APP_ID,
-    },
-
-    inputs: [
-      {
-        data: {
-          image: {
-            url: IMAGE_URL,
-          },
-        },
-      },
-    ],
-  });
-
-  const requestOptions = {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      Authorization: 'Key ' + PAT,
-    },
-
-    body: raw,
-  };
-  return requestOptions;
-};
-
 interface User {
   id: string;
   name: string;
@@ -67,23 +27,25 @@ interface AppState {
   isSignIn: boolean;
 }
 
+const initialState = {
+  input: '',
+  imageUrl: '',
+  box: {},
+  route: 'signin',
+  isSignIn: false,
+  user: {
+    id: '',
+    name: '',
+    email: '',
+    entries: 0,
+    joined: '',
+  },
+};
+
 class App extends Component<{}, AppState> {
   constructor(props: any) {
     super(props);
-    this.state = {
-      input: '',
-      imageUrl: '',
-      box: {},
-      route: 'signin',
-      isSignIn: false,
-      user: {
-        id: '',
-        name: '',
-        email: '',
-        entries: 0,
-        joined: '',
-      },
-    };
+    this.state = initialState;
   }
 
   loadUser = (data: User) => {
@@ -151,7 +113,7 @@ class App extends Component<{}, AppState> {
 
   onRouteChange = (route: string) => {
     if (route === 'signout') {
-      this.setState({ isSignIn: false });
+      this.setState(initialState);
     } else if (route === 'home') {
       this.setState({ isSignIn: true });
     }
