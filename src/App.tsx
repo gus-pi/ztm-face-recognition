@@ -85,7 +85,7 @@ class App extends Component<{}, AppState> {
   onSubmit = () => {
     this.setState({ imageUrl: this.state.input });
     console.log('click');
-    fetch('http://localhost:3001/clarifai', {
+    fetch('http://localhost:3001/image', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ imageUrl: this.state.input }),
