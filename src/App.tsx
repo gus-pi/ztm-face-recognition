@@ -85,7 +85,7 @@ class App extends Component<{}, AppState> {
   onSubmit = () => {
     this.setState({ imageUrl: this.state.input });
     console.log('click');
-    fetch('http://localhost:3001/image', {
+    fetch('https://face-api-at6h.onrender.com/image', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ imageUrl: this.state.input }),
@@ -93,7 +93,7 @@ class App extends Component<{}, AppState> {
       .then((response) => response.json())
       .then((response) => {
         if (response) {
-          fetch('http://localhost:3001/image', {
+          fetch('https://face-api-at6h.onrender.com/image', {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
